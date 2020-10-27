@@ -444,10 +444,11 @@ public final class Insetter {
         view.setLayoutParams(lp);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-          view.post(new Runnable() {
+          final View parent = (View) view.getParent();
+          parent.post(new Runnable() {
             @Override
             public void run() {
-              view.getParent().requestLayout();
+              parent.requestLayout();
             }
           });
         }
