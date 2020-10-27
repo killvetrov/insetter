@@ -443,8 +443,10 @@ public final class Insetter {
         mlp.bottomMargin = marginBottom;
         view.setLayoutParams(lp);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-          view.getParent().requestLayout();
+        View v = view;
+        while (v.getParent() instanceof View) {
+          v = (View) v.getParent();
+          v.forceLayout();
         }
 
         if (Log.isLoggable(TAG, Log.DEBUG)) {
