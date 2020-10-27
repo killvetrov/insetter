@@ -445,10 +445,10 @@ public final class Insetter {
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
           final View parent = (View) view.getParent();
-          if (parent.isInLayout()) parent.post(new Runnable() {
+          parent.post(new Runnable() {
             @Override
             public void run() {
-              view.requestLayout();
+              parent.forceLayout();
             }
           });
         }
